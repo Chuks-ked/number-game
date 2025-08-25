@@ -2,7 +2,7 @@ import PrimaryButton from '@/components/PrimaryButton';
 import { useState } from 'react';
 import { Alert, StyleSheet, TextInput, View } from 'react-native';
 
-const StartGameScreen = () => {
+const StartGameScreen = ({ onPickNumber }) => {
 
     const [enteredValue, setEnteredValue] = useState('');
 
@@ -26,7 +26,8 @@ const StartGameScreen = () => {
             return;
         }
         // Proceed with the valid number
-        console.log('Chosen Number:', chosenNumber);
+        onPickNumber(chosenNumber);
+        setEnteredValue('');
     }
 
     return (
@@ -37,7 +38,7 @@ const StartGameScreen = () => {
                 keyboardType='number-pad'
                 autoCapitalize='none'
                 autoCorrect={false}
-                placeholder='00'
+                // placeholder='00'
                 placeholderTextColor='#ddb52f'
                 value={enteredValue}
                 onChangeText={numberInputHandler}
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
     },
     input: {
-        height: 50,
+        height: 60,
         width: 50,
         borderBottomColor: '#ddb52f',
         borderBottomWidth: 2,
